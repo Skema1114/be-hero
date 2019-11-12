@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>listaHeroi</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-content>
+    <ion-list>
+      <ion-card *ngFor="let item of retorno | async">
+        <ion-card-header>
+          <!--
+          <ion-card-title>{{ item.titulo }}</ion-card-title>
+          <ion-note>
+
+             <div class="ion-text-end">
+              {{ item.genero }}
+            </div>
+          </ion-note>
+          -->
+        </ion-card-header>
+      </ion-card>
+    </ion-list>
+  </ion-content>
+</ion-content>

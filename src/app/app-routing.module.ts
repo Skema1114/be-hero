@@ -12,7 +12,8 @@ const routes: Routes = [
   {
     path: 'inicio-privado',
     loadChildren: './pages/private/inicio-privado/inicio-privado.module#InicioPrivadoPageModule'
-  }
+  },  { path: 'lista-heroi', loadChildren: './pages/private/lista-heroi/lista-heroi.module#ListaHeroiPageModule' }
+
 ];
 
 @NgModule({
