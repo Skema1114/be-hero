@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-// import { AngularFireDatabase } from '@angular/fire/databa';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { HeroServiceService } from 'src/app/services/hero-service.service';
 
 @Component({
   selector: 'app-lista-heroi',
@@ -11,10 +10,12 @@ import { Observable } from 'rxjs';
 export class ListaHeroiPage implements OnInit {
   retorno: any;
 
-  constructor(/*private fb: AngularFireDatabase,*/ private rota: Router) {
-    // this.retorno = fb.list('/filmes').valueChanges();
-    // console.log(this.retorno);
+  constructor(private heroiCaracter: HeroServiceService, private rota: Router) {
+    heroiCaracter.chamarMarvel('personagem', 1).subscribe(resp => {
+      this.retorno = resp;
+      console.log('ESSE E O RETORNO' + this.retorno);
+    });
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 }
