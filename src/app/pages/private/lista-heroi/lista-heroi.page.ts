@@ -9,13 +9,17 @@ import { HeroServiceService } from 'src/app/services/hero-service.service';
 })
 export class ListaHeroiPage implements OnInit {
   retorno: any;
+  maxHerois: string;
 
   constructor(private heroiCaracter: HeroServiceService, private rota: Router) {
-    heroiCaracter.chamarMarvel('personagem', 1).subscribe(resp => {
-      this.retorno = resp;
-      console.log('ESSE E O RETORNO' + this.retorno);
+    heroiCaracter.chamarMarvel('personagem', 20).subscribe(resp => {
+      console.log('ESSE E O RETORNO', resp.data);
+      // this.maxHerois = resp.data.results.thumnail.path;
+      this.retorno = resp.data.results;
+      console.log(this.retorno);
     });
   }
+
 
   ngOnInit() { }
 }

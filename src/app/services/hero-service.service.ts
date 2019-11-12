@@ -15,7 +15,7 @@ export class HeroServiceService {
   private ordenarPor: string;
   private url = `https://gateway.marvel.com:443`;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   public chamarMarvel(tipoServico: string, quantItens: number): Observable<any> {
     switch (tipoServico) {
@@ -40,7 +40,6 @@ export class HeroServiceService {
         this.url += `/v1/public/comics`;
         this.url += `?ts=${this.timestamp}`;
         this.url += `&orderBy=${this.ordenarPor}`;
-        this.url += `&limit=${quantItens}`;
         this.url += `&apikey=${this.publicKey}`;
         this.url += `&hash=${this.hash}`;
 
@@ -54,7 +53,6 @@ export class HeroServiceService {
         this.url += `/v1/public/creators`;
         this.url += `?ts=${this.timestamp}`;
         this.url += `&orderBy=${this.ordenarPor}`;
-        this.url += `&limit=${quantItens}`;
         this.url += `&apikey=${this.publicKey}`;
         this.url += `&hash=${this.hash}`;
 
@@ -68,7 +66,6 @@ export class HeroServiceService {
         this.url += `/v1/public/events`;
         this.url += `?ts=${this.timestamp}`;
         this.url += `&orderBy=${this.ordenarPor}`;
-        this.url += `&limit=${quantItens}`;
         this.url += `&apikey=${this.publicKey}`;
         this.url += `&hash=${this.hash}`;
 
@@ -82,7 +79,6 @@ export class HeroServiceService {
         this.url += `/v1/public/series`;
         this.url += `?ts=${this.timestamp}`;
         this.url += `&orderBy=${this.ordenarPor}`;
-        this.url += `&limit=${quantItens}`;
         this.url += `&apikey=${this.publicKey}`;
         this.url += `&hash=${this.hash}`;
 
@@ -94,6 +90,24 @@ export class HeroServiceService {
         this.ordenarPor = 'id';
 
         this.url += `/v1/public/stories`;
+        this.url += `?ts=${this.timestamp}`;
+        this.url += `&orderBy=${this.ordenarPor}`;
+        this.url += `&apikey=${this.publicKey}`;
+        this.url += `&hash=${this.hash}`;
+
+        return this.http.get(this.url);
+        break;
+    }
+  }
+
+  getDescription(id: number, tipoServico: string, quantItens: number) {
+    switch (tipoServico) {
+      case 'personagem':
+
+        this.ordenarPor = 'name';
+
+        this.url += `/v1/public/characters`;
+        this.url += `/${id}`;
         this.url += `?ts=${this.timestamp}`;
         this.url += `&orderBy=${this.ordenarPor}`;
         this.url += `&limit=${quantItens}`;
