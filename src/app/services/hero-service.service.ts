@@ -15,17 +15,17 @@ export class HeroServiceService {
   private ordenarPor: string;
   private url: string;
   private url2: string;
+  private url3: string;
 
-  constructor(private http: HttpClient) {
-    this.url = `https://gateway.marvel.com:443`;
-    this.url2 = `https://gateway.marvel.com:443`;
-  }
+  constructor(private http: HttpClient) { }
 
   public chamarMarvel(tipoServico: string, quantItens: number): Observable<any> {
     switch (tipoServico) {
       // #########################
       case 'personagem':
         this.ordenarPor = 'name';
+
+        this.url = `https://gateway.marvel.com:443`;
 
         this.url += `/v1/public/characters`;
         this.url += `?ts=${this.timestamp}`;
@@ -41,6 +41,8 @@ export class HeroServiceService {
       case 'quadrinho':
         this.ordenarPor = 'title';
 
+        this.url = `https://gateway.marvel.com:443`;
+
         this.url += `/v1/public/comics`;
         this.url += `?ts=${this.timestamp}`;
         this.url += `&orderBy=${this.ordenarPor}`;
@@ -53,6 +55,8 @@ export class HeroServiceService {
       // #########################
       case 'criador':
         this.ordenarPor = 'firstName';
+
+        this.url = `https://gateway.marvel.com:443`;
 
         this.url += `/v1/public/creators`;
         this.url += `?ts=${this.timestamp}`;
@@ -67,6 +71,8 @@ export class HeroServiceService {
       case 'evento':
         this.ordenarPor = 'name';
 
+        this.url = `https://gateway.marvel.com:443`;
+
         this.url += `/v1/public/events`;
         this.url += `?ts=${this.timestamp}`;
         this.url += `&orderBy=${this.ordenarPor}`;
@@ -80,6 +86,8 @@ export class HeroServiceService {
       case 'serie':
         this.ordenarPor = 'title';
 
+        this.url = `https://gateway.marvel.com:443`;
+
         this.url += `/v1/public/series`;
         this.url += `?ts=${this.timestamp}`;
         this.url += `&orderBy=${this.ordenarPor}`;
@@ -92,6 +100,8 @@ export class HeroServiceService {
       // #########################
       case 'historia':
         this.ordenarPor = 'id';
+
+        this.url = `https://gateway.marvel.com:443`;
 
         this.url += `/v1/public/stories`;
         this.url += `?ts=${this.timestamp}`;
@@ -110,6 +120,8 @@ export class HeroServiceService {
       case 'personagem':
         this.ordenarPor = 'name';
 
+        this.url2 = `https://gateway.marvel.com:443`;
+
         this.url2 += `/v1/public/characters`;
         this.url2 += `/${id}`;
         this.url2 += `?ts=${this.timestamp}`;
@@ -125,6 +137,8 @@ export class HeroServiceService {
       case 'quadrinho':
         this.ordenarPor = 'title';
 
+        this.url2 = `https://gateway.marvel.com:443`;
+
         this.url2 += `/v1/public/comics`;
         this.url2 += `/${id}`;
         this.url2 += `?ts=${this.timestamp}`;
@@ -138,6 +152,8 @@ export class HeroServiceService {
       // #########################
       case 'criador':
         this.ordenarPor = 'firstName';
+
+        this.url2 = `https://gateway.marvel.com:443`;
 
         this.url2 += `/v1/public/creators`;
         this.url2 += `/${id}`;
@@ -153,6 +169,8 @@ export class HeroServiceService {
       case 'evento':
         this.ordenarPor = 'name';
 
+        this.url2 = `https://gateway.marvel.com:443`;
+
         this.url2 += `/v1/public/events`;
         this.url2 += `/${id}`;
         this.url2 += `?ts=${this.timestamp}`;
@@ -166,6 +184,8 @@ export class HeroServiceService {
       // #########################
       case 'serie':
         this.ordenarPor = 'title';
+
+        this.url2 = `https://gateway.marvel.com:443`;
 
         this.url2 += `/v1/public/series`;
         this.url2 += `/${id}`;
@@ -181,6 +201,8 @@ export class HeroServiceService {
       case 'historia':
         this.ordenarPor = 'id';
 
+        this.url2 = `https://gateway.marvel.com:443`;
+
         this.url2 += `/v1/public/stories`;
         this.url2 += `/${id}`;
         this.url2 += `?ts=${this.timestamp}`;
@@ -193,36 +215,89 @@ export class HeroServiceService {
     }
   }
 
-  public limparChamarHeroi() {
-    this.url2 = `https://gateway.marvel.com:443`;
+  public chamarDetalhesHeroi(id: number, tipoDetalhe: string): Observable<any> {
+    switch (tipoDetalhe) {
+      // #########################
+      case 'quadrinhos':
+        this.ordenarPor = 'title';
+
+        this.url3 = `https://gateway.marvel.com:443`;
+
+        this.url3 += `/v1/public/characters`;
+        this.url3 += `/${id}`;
+        this.url3 += `/comics`;
+        this.url3 += `?ts=${this.timestamp}`;
+        this.url3 += `&orderBy=${this.ordenarPor}`;
+        this.url3 += `&apikey=${this.publicKey}`;
+        this.url3 += `&hash=${this.hash}`;
+        // QUANTIDADE data.total FOR MAIOR QUE ZERO
+        // TITULO data.results[].title
+        // IMAGEM data.results[].thumbnail.path || data.results[].thumbnail.extension
+        //https://gateway.marvel.com/v1/public/characters/1011334/comics?ts=1&limit=10&apikey=6f20b1d3be1fedab63c26386708c4529&hash=c216406f2236ea411cdbdbb6e442154e
+        return this.http.get(this.url3);
+        break;
+
+      // #########################
+      case 'eventos':
+        this.ordenarPor = 'name';
+
+        this.url3 = `https://gateway.marvel.com:443`;
+
+        this.url3 += `/v1/public/characters`;
+        this.url3 += `/${id}`;
+        this.url3 += `/events`;
+        this.url3 += `?ts=${this.timestamp}`;
+        this.url3 += `&orderBy=${this.ordenarPor}`;
+        this.url3 += `&apikey=${this.publicKey}`;
+        this.url3 += `&hash=${this.hash}`;
+        // QUANTIDADE data.total FOR MAIOR QUE ZERO
+        // TITULO data.results[].title
+        // IMAGEM data.results[].thumbnail.path || data.results[].thumbnail.extension
+
+        return this.http.get(this.url3);
+        break;
+
+      // #########################
+      case 'series':
+        this.ordenarPor = 'title';
+
+        this.url3 = `https://gateway.marvel.com:443`;
+
+        this.url3 += `/v1/public/characters`;
+        this.url3 += `/${id}`;
+        this.url3 += `/series`;
+        this.url3 += `?ts=${this.timestamp}`;
+        this.url3 += `&orderBy=${this.ordenarPor}`;
+        this.url3 += `&apikey=${this.publicKey}`;
+        this.url3 += `&hash=${this.hash}`;
+        // QUANTIDADE data.total FOR MAIOR QUE ZERO
+        // TITULO data.results[].title
+        // IMAGEM data.results[].thumbnail.path || data.results[].thumbnail.extension
+
+        return this.http.get(this.url3);
+        break;
+
+      // #########################
+      case 'stories':
+        this.ordenarPor = 'id';
+
+        this.url3 = `https://gateway.marvel.com:443`;
+
+        this.url3 += `/v1/public/characters`;
+        this.url3 += `/${id}`;
+        this.url3 += `/stories`;
+        this.url3 += `?ts=${this.timestamp}`;
+        this.url3 += `&orderBy=${this.ordenarPor}`;
+        this.url3 += `&apikey=${this.publicKey}`;
+        this.url3 += `&hash=${this.hash}`;
+        // QUANTIDADE data.total FOR MAIOR QUE ZERO
+        // TITULO data.results[].title
+        // IMAGEM data.results[].thumbnail.path || data.results[].thumbnail.extension
+
+        return this.http.get(this.url3);
+        break;
+    }
   }
-
-  public limparChamarMarvel() {
-    this.url = `https://gateway.marvel.com:443`;
-  }
-
-  /** SITE TUTORIAL
-   *
-   * Como você pode ver no método acima, para acessar a API da Marvel,
-   * é preciso algumas credencias que podem ser encontradas neste link.
-   * Você irá utilizá-las para criar uma hash com a seguinte estrutura:
-   * (chave pública + chave privada+ timestamp) em um hash md5. Para
-   * essa ação, você precisará de um módulo chamado ts-md5, que pode
-   * ser baixado no portal NPM através do seguinte comando:
-   */
-
-  /** SITE MARVEL
-   *
-   * Authentication for Server-Side Applications
-   * Server-side applications must pass two parameters in addition to the apikey parameter:
-   * ts - a timestamp (or other long string which can change on a request-by-request basis)
-   * hash - a md5 digest of the ts parameter, your private key and your public key (e.g. md5(ts+privateKey+publicKey)
-   * For example, a user with a public key of "1234" and a private key of "abcd" could construct
-   * a valid call as follows:
-   * http://gateway.marvel.com/v1/public/comics?ts=1&apikey=1234&hash=ffd275c5130566a2916217b101f26150
-   * (the hash value is the md5 digest of 1abcd1234)
-   */
-
   /** TESTE DE LINK FUNFANDOOOO
    * https://gateway.marvel.com/v1/public/characters?ts=1&orderBy=name&limit=10&apikey=6f20b1d3be1fedab63c26386708c4529&hash=c216406f2236ea411cdbdbb6e442154e
    */

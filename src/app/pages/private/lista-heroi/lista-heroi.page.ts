@@ -10,9 +10,12 @@ import { HeroServiceService } from 'src/app/services/hero-service.service';
 export class ListaHeroiPage implements OnInit {
   retorno: any;
   retornoSeparado: any;
+  quantidadeSelect: number;
 
   constructor(private heroiCaracter: HeroServiceService, private rota: Router) {
-    heroiCaracter.chamarMarvel('personagem', 20).subscribe(resp => {
+    this.quantidadeSelect = 20;
+
+    heroiCaracter.chamarMarvel('personagem', this.quantidadeSelect).subscribe(resp => {
       console.log('ESSE E O RETORNO', resp.data);
       this.retorno = resp.data.results;
       console.log(this.retorno);

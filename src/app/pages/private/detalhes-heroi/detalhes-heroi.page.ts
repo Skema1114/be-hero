@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { HeroServiceService } from 'src/app/services/hero-service.service';
 
 @Component({
   selector: 'app-detalhes-heroi',
@@ -8,9 +9,34 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class DetalhesHeroiPage implements OnInit {
   // idHeroi
+  retorno: any;
+  retornoQuadrinhos: any;
+  retornoEventos: any;
+  retornoSeries: any;
+  retornoStories: any;
 
-  constructor(private rotaLink: ActivatedRoute) {
-    console.log('AQUIIII' + rotaLink.snapshot.data.idHeroi);
+  constructor(private rota: ActivatedRoute, private heroiCaracterSolo: HeroServiceService) {
+    const qualHeroi = rota.snapshot.params.idHeroi;
+
+    heroiCaracterSolo.chamarHeroi(qualHeroi, 'personagem', 20).subscribe(resp => {
+      this.retorno = resp.data.results;
+    });
+
+    heroiCaracterSolo.chamarDetalhesHeroi(qualHeroi, 'quadrinhos').subscribe(respQuadrinhos => {
+      this.retornoQuadrinhos = respQuadrinhos.data.results;
+    });
+
+    heroiCaracterSolo.chamarDetalhesHeroi(qualHeroi, 'eventos').subscribe(respEventos => {
+      this.retornoEventos = respEventos.data.results;
+    });
+
+    heroiCaracterSolo.chamarDetalhesHeroi(qualHeroi, 'series').subscribe(respSeries => {
+      this.retornoSeries = respSeries.data.results;
+    });
+
+    heroiCaracterSolo.chamarDetalhesHeroi(qualHeroi, 'stories').subscribe(respStories => {
+      this.retornoStories = respStories.data.results;
+    });
   }
 
   ngOnInit() {
