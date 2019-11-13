@@ -4,16 +4,19 @@
   </ion-toolbar>
 </ion-header>
 
-<!-- REFERENCIA: https://imasters.com.br/apis-microsservicos/ionic-3-consumindo-api-da-marvel-->
+<!-- REFERENCIA: https://imasters.com.br/apis-microsservicos/ionic-3-consumindo-api-da-marvel -->
 
 <ion-content>
   <ion-content>
     <ion-list>
-      <ion-item (click)="getDescription(hero.id)" *ngFor="let item of retorno">
-        <ion-avatar item-right>
+      <ion-item (click)="heroiChamar(item.id)" *ngFor="let item of retorno">
+        <ion-avatar item-left>
           <ion-img src="{{item.thumbnail.path}}.{{item.thumbnail.extension}}"></ion-img>
         </ion-avatar>
         <h2>{{ item.name }}</h2>
+        <ion-button href="detalhes-heroi/{{ item.id }}" expand="block">
+          detalhes
+        </ion-button>
       </ion-item>
     </ion-list>
   </ion-content>

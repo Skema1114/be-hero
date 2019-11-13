@@ -13,9 +13,13 @@ export class HeroServiceService {
   private timestamp = Number(new Date());
   private hash = Md5.hashStr(this.timestamp + this.privateKey + this.publicKey);
   private ordenarPor: string;
-  private url = `https://gateway.marvel.com:443`;
+  private url: string;
+  private url2: string;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    this.url = `https://gateway.marvel.com:443`;
+    this.url2 = `https://gateway.marvel.com:443`;
+  }
 
   public chamarMarvel(tipoServico: string, quantItens: number): Observable<any> {
     switch (tipoServico) {
@@ -100,23 +104,101 @@ export class HeroServiceService {
     }
   }
 
-  getDescription(id: number, tipoServico: string, quantItens: number) {
+  public chamarHeroi(id: number, tipoServico: string, quantItens: number): Observable<any> {
     switch (tipoServico) {
+      // #########################
       case 'personagem':
-
         this.ordenarPor = 'name';
 
-        this.url += `/v1/public/characters`;
-        this.url += `/${id}`;
-        this.url += `?ts=${this.timestamp}`;
-        this.url += `&orderBy=${this.ordenarPor}`;
-        this.url += `&limit=${quantItens}`;
-        this.url += `&apikey=${this.publicKey}`;
-        this.url += `&hash=${this.hash}`;
+        this.url2 += `/v1/public/characters`;
+        this.url2 += `/${id}`;
+        this.url2 += `?ts=${this.timestamp}`;
+        this.url2 += `&orderBy=${this.ordenarPor}`;
+        this.url2 += `&limit=${quantItens}`;
+        this.url2 += `&apikey=${this.publicKey}`;
+        this.url2 += `&hash=${this.hash}`;
 
-        return this.http.get(this.url);
+        return this.http.get(this.url2);
+        break;
+
+      // #########################
+      case 'quadrinho':
+        this.ordenarPor = 'title';
+
+        this.url2 += `/v1/public/comics`;
+        this.url2 += `/${id}`;
+        this.url2 += `?ts=${this.timestamp}`;
+        this.url2 += `&orderBy=${this.ordenarPor}`;
+        this.url2 += `&apikey=${this.publicKey}`;
+        this.url2 += `&hash=${this.hash}`;
+
+        return this.http.get(this.url2);
+        break;
+
+      // #########################
+      case 'criador':
+        this.ordenarPor = 'firstName';
+
+        this.url2 += `/v1/public/creators`;
+        this.url2 += `/${id}`;
+        this.url2 += `?ts=${this.timestamp}`;
+        this.url2 += `&orderBy=${this.ordenarPor}`;
+        this.url2 += `&apikey=${this.publicKey}`;
+        this.url2 += `&hash=${this.hash}`;
+
+        return this.http.get(this.url2);
+        break;
+
+      // #########################
+      case 'evento':
+        this.ordenarPor = 'name';
+
+        this.url2 += `/v1/public/events`;
+        this.url2 += `/${id}`;
+        this.url2 += `?ts=${this.timestamp}`;
+        this.url2 += `&orderBy=${this.ordenarPor}`;
+        this.url2 += `&apikey=${this.publicKey}`;
+        this.url2 += `&hash=${this.hash}`;
+
+        return this.http.get(this.url2);
+        break;
+
+      // #########################
+      case 'serie':
+        this.ordenarPor = 'title';
+
+        this.url2 += `/v1/public/series`;
+        this.url2 += `/${id}`;
+        this.url2 += `?ts=${this.timestamp}`;
+        this.url2 += `&orderBy=${this.ordenarPor}`;
+        this.url2 += `&apikey=${this.publicKey}`;
+        this.url2 += `&hash=${this.hash}`;
+
+        return this.http.get(this.url2);
+        break;
+
+      // #########################
+      case 'historia':
+        this.ordenarPor = 'id';
+
+        this.url2 += `/v1/public/stories`;
+        this.url2 += `/${id}`;
+        this.url2 += `?ts=${this.timestamp}`;
+        this.url2 += `&orderBy=${this.ordenarPor}`;
+        this.url2 += `&apikey=${this.publicKey}`;
+        this.url2 += `&hash=${this.hash}`;
+
+        return this.http.get(this.url2);
         break;
     }
+  }
+
+  public limparChamarHeroi() {
+    this.url2 = `https://gateway.marvel.com:443`;
+  }
+
+  public limparChamarMarvel() {
+    this.url = `https://gateway.marvel.com:443`;
   }
 
   /** SITE TUTORIAL

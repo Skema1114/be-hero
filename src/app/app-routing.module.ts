@@ -13,7 +13,9 @@ const routes: Routes = [
     path: 'inicio-privado',
     loadChildren: './pages/private/inicio-privado/inicio-privado.module#InicioPrivadoPageModule'
   },
-  { path: 'lista-heroi', loadChildren: './pages/private/lista-heroi/lista-heroi.module#ListaHeroiPageModule' }
+  { path: 'lista-heroi', loadChildren: './pages/private/lista-heroi/lista-heroi.module#ListaHeroiPageModule' },
+  { path: 'detalhes-heroi/:idHeroi', loadChildren: './pages/private/detalhes-heroi/detalhes-heroi.module#DetalhesHeroiPageModule' }
+
 
 ];
 
@@ -21,4 +23,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
