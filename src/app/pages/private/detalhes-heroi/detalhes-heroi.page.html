@@ -19,15 +19,24 @@
       <ion-card-subtitle>Quadrinhos = {{ item.comics.available }}</ion-card-subtitle>
       <ion-card-title></ion-card-title>
     </ion-card-header>
-    <ion-card-content *ngFor="let rQuadrinhos of retornoQuadrinhos">
-      <ion-list>
-        <ion-item>
-          <h2>{{ rQuadrinhos.title }}</h2>
-        </ion-item>
-        <ion-item>
-          <ion-img src="{{rQuadrinhos.thumbnail.path}}.{{rQuadrinhos.thumbnail.extension}}"></ion-img>
-        </ion-item>
-      </ion-list>
+    <ion-card-content>
+      <ion-slides pager="true" [options]="sliderConfig">
+        <ion-slide *ngFor="let rQuadrinhos of retornoQuadrinhos">
+          <ion-list>
+            <ion-card>
+              <ion-card-header>
+                <ion-card-subtitle></ion-card-subtitle>
+                <ion-card-title>
+                  <h2>{{ rQuadrinhos.title }}</h2>
+                </ion-card-title>
+              </ion-card-header>
+              <ion-card-content>
+                <ion-img src="{{rQuadrinhos.thumbnail.path}}.{{rQuadrinhos.thumbnail.extension}}"></ion-img>
+              </ion-card-content>
+            </ion-card>
+          </ion-list>
+        </ion-slide>
+      </ion-slides>
     </ion-card-content>
   </ion-card>
 
@@ -36,15 +45,24 @@
       <ion-card-subtitle>Events = {{ item.events.available }}</ion-card-subtitle>
       <ion-card-title></ion-card-title>
     </ion-card-header>
-    <ion-card-content *ngFor="let rEventos of retornoEventos">
-      <ion-list>
-        <ion-item>
-          <h2>{{ rEventos.title }}</h2>
-        </ion-item>
-        <ion-item>
-          <ion-img src="{{rEventos.thumbnail.path}}.{{rEventos.thumbnail.extension}}"></ion-img>
-        </ion-item>
-      </ion-list>
+    <ion-card-content>
+      <ion-slides pager="true" [options]="sliderConfig">
+        <ion-slide *ngFor="let rEventos of retornoEventos">
+          <ion-list>
+            <ion-card>
+              <ion-card-header>
+                <ion-card-subtitle></ion-card-subtitle>
+                <ion-card-title>
+                  <h2>{{ rEventos.title }}</h2>
+                </ion-card-title>
+              </ion-card-header>
+              <ion-card-content>
+                <ion-img src="{{rEventos.thumbnail.path}}.{{rEventos.thumbnail.extension}}"></ion-img>
+              </ion-card-content>
+            </ion-card>
+          </ion-list>
+        </ion-slide>
+      </ion-slides>
     </ion-card-content>
   </ion-card>
 
@@ -53,39 +71,57 @@
       <ion-card-subtitle>Series = {{ item.series.available }}</ion-card-subtitle>
       <ion-card-title></ion-card-title>
     </ion-card-header>
-    <ion-card-content *ngFor="let rSeries of retornoSeries">
-      <ion-list>
-        <ion-item>
-          <h2>{{ rSeries.title }}</h2>
-        </ion-item>
-        <ion-item>
-          <ion-img src="{{rSeries.thumbnail.path}}.{{rSeries.thumbnail.extension}}"></ion-img>
-        </ion-item>
-      </ion-list>
+    <ion-card-content>
+      <ion-slides pager="true" [options]="sliderConfig">
+        <ion-slide *ngFor="let rSeries of retornoSeries">
+          <ion-list>
+            <ion-card>
+              <ion-card-header>
+                <ion-card-subtitle></ion-card-subtitle>
+                <ion-card-title>
+                  <h2>{{ rSeries.title }}</h2>
+                </ion-card-title>
+              </ion-card-header>
+              <ion-card-content>
+                <ion-img src="{{rSeries.thumbnail.path}}.{{rSeries.thumbnail.extension}}"></ion-img>
+              </ion-card-content>
+            </ion-card>
+          </ion-list>
+        </ion-slide>
+      </ion-slides>
     </ion-card-content>
   </ion-card>
 
   <!--
-  <ion-card>
+      <ion-card>
     <ion-card-header>
       <ion-card-subtitle>Stories = {{ item.stories.available }}</ion-card-subtitle>
       <ion-card-title></ion-card-title>
     </ion-card-header>
-    <ion-card-content *ngFor="let rStories of retornoStories">
-      <ion-list>
-        <ion-item>
-          <h2>{{ rStories.title }}</h2>
-        </ion-item>
-        <ion-item>
-          <ion-img src="{{rStories.thumbnail.path}}.{{rStories.thumbnail.extension}}"></ion-img>
-        </ion-item>
-      </ion-list>
+    <ion-card-content>
+      <ion-slides pager="true" [options]="sliderConfig">
+        <ion-slide *ngFor="let rStories of retornoStories">
+          <ion-list>
+            <ion-card>
+              <ion-card-header>
+                <ion-card-subtitle></ion-card-subtitle>
+                <ion-card-title>
+                  <h2>{{ rStories.title }}</h2>
+                </ion-card-title>
+              </ion-card-header>
+              <ion-card-content>
+                <ion-img src="{{rStories.thumbnail.path}}.{{rStories.thumbnail.extension}}"></ion-img>
+              </ion-card-content>
+            </ion-card>
+          </ion-list>
+        </ion-slide>
+      </ion-slides>
     </ion-card-content>
   </ion-card>
 -->
 </ion-content>
 
-<ion-footer>
+<ion-footer color="white">
   <ion-grid>
     <ion-row>
       <ion-col size="3">

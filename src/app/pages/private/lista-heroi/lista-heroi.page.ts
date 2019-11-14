@@ -27,7 +27,6 @@ export class ListaHeroiPage implements OnInit {
     this.heroiCaracter.chamarHeroi(id, 'personagem', 20).subscribe(respp => {
       this.retornoSeparado = respp.data.results;
       console.log(respp);
-      this.heroiCaracter.limparChamarHeroi();
     });
 
   }

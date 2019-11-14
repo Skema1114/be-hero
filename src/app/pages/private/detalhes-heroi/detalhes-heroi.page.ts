@@ -8,7 +8,12 @@ import { HeroServiceService } from 'src/app/services/hero-service.service';
   styleUrls: ['./detalhes-heroi.page.scss'],
 })
 export class DetalhesHeroiPage implements OnInit {
-  // idHeroi
+
+  sliderConfig = {
+    initialSlide: 1,
+    speed: 400
+  };
+
   retorno: any;
   retornoQuadrinhos: any;
   retornoEventos: any;
