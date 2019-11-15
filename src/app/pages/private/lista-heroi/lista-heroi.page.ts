@@ -8,18 +8,23 @@ import { HeroServiceService } from 'src/app/services/hero-service.service';
   styleUrls: ['./lista-heroi.page.scss']
 })
 export class ListaHeroiPage implements OnInit {
-  retorno: any;
+  retorno = new Array();
   retornoSeparado: any;
   quantidadeSelect: number;
 
   constructor(private heroiCaracter: HeroServiceService, private rota: Router) {
-    this.quantidadeSelect = 20;
-
+    this.quantidadeSelect = 100;
+    
+    for(){
     heroiCaracter.chamarMarvel('personagem', this.quantidadeSelect).subscribe(resp => {
       console.log('ESSE E O RETORNO', resp.data);
-      this.retorno = resp.data.results;
+
+      resp.data.results.forEach(element => {
+        this.retorno.push(element);
+      });
       console.log(this.retorno);
     });
+  };
   }
 
 

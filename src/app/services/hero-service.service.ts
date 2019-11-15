@@ -16,6 +16,7 @@ export class HeroServiceService {
   private url: string;
   private url2: string;
   private url3: string;
+  private pagNumber = 0;
 
   constructor(private http: HttpClient) { }
 
@@ -25,10 +26,12 @@ export class HeroServiceService {
       case 'personagem':
         this.ordenarPor = 'name';
 
+
         this.url = `https://gateway.marvel.com:443`;
 
         this.url += `/v1/public/characters`;
         this.url += `?ts=${this.timestamp}`;
+        this.url += `&orderBy=${this.pagNumber}`;
         this.url += `&orderBy=${this.ordenarPor}`;
         this.url += `&limit=${quantItens}`;
         this.url += `&apikey=${this.publicKey}`;
@@ -45,6 +48,7 @@ export class HeroServiceService {
 
         this.url += `/v1/public/comics`;
         this.url += `?ts=${this.timestamp}`;
+        this.url += `&orderBy=${this.pagNumber}`;
         this.url += `&orderBy=${this.ordenarPor}`;
         this.url += `&apikey=${this.publicKey}`;
         this.url += `&hash=${this.hash}`;
@@ -60,6 +64,7 @@ export class HeroServiceService {
 
         this.url += `/v1/public/creators`;
         this.url += `?ts=${this.timestamp}`;
+        this.url += `&orderBy=${this.pagNumber}`;
         this.url += `&orderBy=${this.ordenarPor}`;
         this.url += `&apikey=${this.publicKey}`;
         this.url += `&hash=${this.hash}`;
@@ -75,6 +80,7 @@ export class HeroServiceService {
 
         this.url += `/v1/public/events`;
         this.url += `?ts=${this.timestamp}`;
+        this.url += `&orderBy=${this.pagNumber}`;
         this.url += `&orderBy=${this.ordenarPor}`;
         this.url += `&apikey=${this.publicKey}`;
         this.url += `&hash=${this.hash}`;
@@ -90,6 +96,7 @@ export class HeroServiceService {
 
         this.url += `/v1/public/series`;
         this.url += `?ts=${this.timestamp}`;
+        this.url += `&orderBy=${this.pagNumber}`;
         this.url += `&orderBy=${this.ordenarPor}`;
         this.url += `&apikey=${this.publicKey}`;
         this.url += `&hash=${this.hash}`;
@@ -105,6 +112,7 @@ export class HeroServiceService {
 
         this.url += `/v1/public/stories`;
         this.url += `?ts=${this.timestamp}`;
+        this.url += `&orderBy=${this.pagNumber}`;
         this.url += `&orderBy=${this.ordenarPor}`;
         this.url += `&apikey=${this.publicKey}`;
         this.url += `&hash=${this.hash}`;
@@ -233,7 +241,9 @@ export class HeroServiceService {
         // QUANTIDADE data.total FOR MAIOR QUE ZERO
         // TITULO data.results[].title
         // IMAGEM data.results[].thumbnail.path || data.results[].thumbnail.extension
-        //https://gateway.marvel.com/v1/public/characters/1011334/comics?ts=1&limit=10&apikey=6f20b1d3be1fedab63c26386708c4529&hash=c216406f2236ea411cdbdbb6e442154e
+        
+        // tslint:disable-next-line: max-line-length
+        // https://gateway.marvel.com/v1/public/characters/1011334/comics?ts=1&limit=10&apikey=6f20b1d3be1fedab63c26386708c4529&hash=c216406f2236ea411cdbdbb6e442154e
         return this.http.get(this.url3);
         break;
 
