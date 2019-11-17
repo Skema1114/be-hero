@@ -9,6 +9,9 @@
 <ion-content>
   <ion-content>
     <ion-list>
+      <ion-item>
+        <ion-searchbar showCancelButton="focus" placeholder="Encontre o Heróis"></ion-searchbar>
+      </ion-item>
       <ion-item (click)="heroiChamar(item.id)" *ngFor="let item of retorno">
         <ion-avatar item-left>
           <ion-img src="{{item.thumbnail.path}}.{{item.thumbnail.extension}}"></ion-img>

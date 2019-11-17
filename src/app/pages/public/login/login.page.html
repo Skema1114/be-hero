@@ -5,6 +5,42 @@
 </ion-header>
 
 <ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Login</ion-card-title>
+      <ion-card-content>
+        <ion-item>
+          <ion-label position="floating">
+            <ion-icon name="mail" slot="start"></ion-icon>
+            E-mail
+          </ion-label>
+          <ion-input [(ngModel)]="email"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">
+            <ion-icon name="lock" slot="start"></ion-icon>
+            Senha
+          </ion-label>
+          <ion-input type="password" [(ngModel)]="senha"></ion-input>
+        </ion-item>
+        <ion-button expand="block" (click)="entrar()">Entrar</ion-button>
+      </ion-card-content>
+    </ion-card-header>
+  </ion-card>
+</ion-content>
+<ion-footer>
+  <!-- ROUTER LINK É MEÇLHOR QUE href PARA FAZER ROTAS -->
+  <ion-button routerLink="/criar-conta" expand="block" fill="clear">
+    Cadastre-se
+  </ion-button>
+</ion-footer>
+
+
+
+<!--
+  LOGIN DO VIDEOO
+
+<ion-content>
   <section *ngIf="(afAuth.user | async) as user; else loginItems">
     <ion-card>
       <ion-card-header>
@@ -31,39 +67,4 @@
     </ion-item>
   </ng-template>
 </ion-content>
-
-
-<!--
-<ion-footer>
-  ROUTER LINK É MEÇLHOR QUE href PARA FAZER ROTAS
-  <ion-button routerLink="/cadastro" expand="block" fill="clear">
-    Cadastre-se
-  </ion-button>
-</ion-footer>
--->
-
-
-<!--
-    <ion-card>
-    <ion-card-header>
-      <ion-card-title>Login</ion-card-title>
-      <ion-card-content>
-        <ion-item>
-          <ion-label position="floating">
-            <ion-icon name="mail" slot="start"></ion-icon>
-            E-mail
-          </ion-label>
-          <ion-input [(ngModel)]="email"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label position="floating">
-            <ion-icon name="lock" slot="start"></ion-icon>
-            Senha
-          </ion-label>
-          <ion-input type="password" [(ngModel)]="senha"></ion-input>
-        </ion-item>
-        <ion-button expand="block" (click)="entrar()">Entrar</ion-button>
-      </ion-card-content>
-    </ion-card-header>
-  </ion-card>
 -->

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { HeroServiceService } from 'src/app/services/hero-service.service';
+import { HeroiService } from 'src/app/services/heroi.service';
 
 @Component({
   selector: 'app-detalhes-heroi',
@@ -20,7 +20,7 @@ export class DetalhesHeroiPage implements OnInit {
   retornoSeries: any;
   retornoStories: any;
 
-  constructor(private rota: ActivatedRoute, private heroiCaracterSolo: HeroServiceService) {
+  constructor(private rota: ActivatedRoute, private heroiCaracterSolo: HeroiService) {
     const qualHeroi = rota.snapshot.params.idHeroi;
 
     heroiCaracterSolo.chamarHeroi(qualHeroi, 'personagem', 20).subscribe(resp => {
