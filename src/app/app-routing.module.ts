@@ -13,12 +13,19 @@ const routes: Routes = [
   },
   {
     path: 'inicio-privado',
-    loadChildren: './pages/private/inicio-privado/inicio-privado.module#InicioPrivadoPageModule'
+    loadChildren: './pages/private/inicio-privado/inicio-privado.module#InicioPrivadoPageModule',
+    canActivate: [SessionGuard]
   },
   {
-    path: 'detalhes-heroi/:idHeroi', loadChildren: './pages/private/detalhes-heroi/detalhes-heroi.module#DetalhesHeroiPageModule', canActivate: [SessionGuard]
+    path: 'detalhes-heroi/:idHeroi',
+    loadChildren: './pages/private/detalhes-heroi/detalhes-heroi.module#DetalhesHeroiPageModule',
+    canActivate: [SessionGuard]
   },
-  { path: 'listar-heroi', loadChildren: './pages/listar-heroi/listar-heroi.module#ListarHeroiPageModule', canActivate: [SessionGuard] }
+  {
+    path: 'listar-heroi',
+    loadChildren: './pages/private/listar-heroi/listar-heroi.module#ListarHeroiPageModule',
+    canActivate: [SessionGuard]
+  }
 
 
 
