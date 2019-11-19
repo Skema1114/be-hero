@@ -22,7 +22,7 @@ export class LoginService {
       user => {
         loading.dismiss();
         if (user.user.emailVerified) {
-          this.route.navigate(['listar-heroi']);
+          this.route.navigateByUrl('tabs/listar-heroi');
         } else {
           this.al.toast({ message: 'Acesso negado! Você precisa verificar seu email.' });
           this.logout();

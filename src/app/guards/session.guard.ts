@@ -20,7 +20,7 @@ export class SessionGuard implements CanActivate {
     return this.login.isLogado().pipe(
       tap(estaLogado => {
         if (!estaLogado) {
-          this.route.navigate(['login']);
+          this.route.navigateByUrl('/login');
         }
       })
     );
