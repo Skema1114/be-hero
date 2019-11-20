@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LoginService } from 'src/app/services/login.service';
 
 @Component({
   selector: 'app-tabs',
@@ -7,7 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TabsPage implements OnInit {
 
-  constructor() { }
+  constructor(private loginServ: LoginService) { }
+
+  deslogar() {
+    this.loginServ.logout();
+  }
 
   ngOnInit() {
   }

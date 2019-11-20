@@ -20,7 +20,7 @@ export class HeroiService {
 
   constructor(private http: HttpClient) { }
 
-  public chamarMarvel(tipoServico: string, quantItens: number): Observable<any> {
+  public chamarMarvel(tipoServico: string, quantItens: number, numOffset: number): Observable<any> {
     switch (tipoServico) {
       // #########################
       case 'personagem':
@@ -31,7 +31,7 @@ export class HeroiService {
 
         this.url += `/v1/public/characters`;
         this.url += `?ts=${this.timestamp}`;
-        // this.url += `&offset=${numOffset}`;
+        this.url += `&offset=${numOffset}`;
         this.url += `&orderBy=${this.ordenarPor}`;
         this.url += `&limit=${quantItens}`;
         this.url += `&apikey=${this.publicKey}`;

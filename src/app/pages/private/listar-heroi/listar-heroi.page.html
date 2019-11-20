@@ -7,20 +7,26 @@
 <!-- REFERENCIA: https://imasters.com.br/apis-microsservicos/ionic-3-consumindo-api-da-marvel -->
 
 <ion-content>
+
+
   <ion-content>
-    <ion-list>
-      <ion-item>
-        <ion-searchbar showCancelButton="focus" placeholder="Encontre o Heróis"></ion-searchbar>
-      </ion-item>
-      <ion-item (click)="heroiChamar(item.id)" *ngFor="let item of retorno">
-        <ion-avatar item-left>
-          <ion-img src="{{item.thumbnail.path}}.{{item.thumbnail.extension}}"></ion-img>
-        </ion-avatar>
-        <h2>{{ item.name }}</h2>
-        <ion-button href="tabs/detalhes-heroi/{{ item.id }}" expand="block">
-          detalhes
-        </ion-button>
-      </ion-item>
-    </ion-list>
+    <ion-item>
+      <ion-searchbar showCancelButton="focus" placeholder="Encontre o Heróis"></ion-searchbar>
+    </ion-item>
+    <div class="ion-padding">
+      <ion-list>
+        <ion-item *ngFor="let item of retornoX" href="tabs/detalhes-heroi/{{ item.id }}">
+          <ion-avatar item-left>
+            <ion-img src="{{item.thumbnail.path}}.{{item.thumbnail.extension}}"></ion-img>
+          </ion-avatar>
+          <h2>{{ item.name }}</h2>
+        </ion-item>
+      </ion-list>
+      <ion-infinite-scroll threshold="200PX" (ionInfinite)="loadData($event)" [disabled]="numTimesLeft <= 0">
+        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+        </ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+    </div>
   </ion-content>
+
 </ion-content>
