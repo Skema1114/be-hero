@@ -48,7 +48,7 @@ export class HeroiService {
 
         this.url += `/v1/public/comics`;
         this.url += `?ts=${this.timestamp}`;
-        // this.url += `&offset=${this.numOffset}`;
+        this.url += `&offset=${numOffset}`;
         this.url += `&orderBy=${this.ordenarPor}`;
         this.url += `&apikey=${this.publicKey}`;
         this.url += `&hash=${this.hash}`;
@@ -64,7 +64,7 @@ export class HeroiService {
 
         this.url += `/v1/public/creators`;
         this.url += `?ts=${this.timestamp}`;
-        // this.url += `&offset=${this.numOffset}`;
+        this.url += `&offset=${numOffset}`;
         this.url += `&orderBy=${this.ordenarPor}`;
         this.url += `&apikey=${this.publicKey}`;
         this.url += `&hash=${this.hash}`;
@@ -80,7 +80,7 @@ export class HeroiService {
 
         this.url += `/v1/public/events`;
         this.url += `?ts=${this.timestamp}`;
-        // this.url += `&offset=${this.numOffset}`;
+        this.url += `&offset=${numOffset}`;
         this.url += `&orderBy=${this.ordenarPor}`;
         this.url += `&apikey=${this.publicKey}`;
         this.url += `&hash=${this.hash}`;
@@ -96,7 +96,7 @@ export class HeroiService {
 
         this.url += `/v1/public/series`;
         this.url += `?ts=${this.timestamp}`;
-        // this.url += `&offset=${this.numOffset}`;
+        this.url += `&offset=${numOffset}`;
         this.url += `&orderBy=${this.ordenarPor}`;
         this.url += `&apikey=${this.publicKey}`;
         this.url += `&hash=${this.hash}`;
@@ -112,7 +112,7 @@ export class HeroiService {
 
         this.url += `/v1/public/stories`;
         this.url += `?ts=${this.timestamp}`;
-        // this.url += `&offset=${this.numOffset}`;
+        this.url += `&offset=${numOffset}`;
         this.url += `&orderBy=${this.ordenarPor}`;
         this.url += `&apikey=${this.publicKey}`;
         this.url += `&hash=${this.hash}`;

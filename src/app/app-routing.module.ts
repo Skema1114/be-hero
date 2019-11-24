@@ -5,19 +5,23 @@ import { SessionGuard } from '../app/guards/session.guard';
 
 
 const routes: Routes = [
-  { path: 'inicio', loadChildren: './pages/public/inicio/inicio.module#InicioPageModule' },
-  { path: 'login', loadChildren: './pages/public/login/login.module#LoginPageModule' },
+  {
+    path: '',
+    loadChildren: './pages/private/tabs/tabs.module#TabsPageModule',
+    canActivate: [SessionGuard]
+  },
+  {
+    path: 'inicio',
+    loadChildren: './pages/public/inicio/inicio.module#InicioPageModule'
+  },
+  {
+    path: 'login',
+    loadChildren: './pages/public/login/login.module#LoginPageModule'
+  },
   {
     path: 'criar-conta',
     loadChildren: './pages/public/criar-conta/criar-conta.module#CriarContaPageModule'
   },
-  { path: '',
-  loadChildren: './pages/private/tabs/tabs.module#TabsPageModule',
-  canActivate: [SessionGuard]
-}
-
-
-
 
 ];
 

@@ -14,8 +14,6 @@ export class ListarHeroiPage implements OnInit {
   quantidadeSelect: number;
   TOTAL_HEROIS: number;
   numOffset: number;
-
-  items = [];
   numTimesLeft = 1;
 
 
@@ -64,7 +62,7 @@ export class ListarHeroiPage implements OnInit {
         this.numTimesLeft -= 1;
       }
       event.target.complete();
-    }, 2000);
+    }, 3000);
   }
   /*
     addMoreItems() {

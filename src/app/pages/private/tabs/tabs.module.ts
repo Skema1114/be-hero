@@ -27,6 +27,11 @@ const routes: Routes = [
         path: 'listar-heroi',
         loadChildren: '../listar-heroi/listar-heroi.module#ListarHeroiPageModule', canActivate: [SessionGuard]
       },
+      {
+        path: 'herois-favoritos',
+        loadChildren: '../herois-favoritos/herois-favoritos.module#HeroisFavoritosPageModule',
+        canActivate: [SessionGuard]
+      }
     ]
   },
   {
@@ -45,4 +50,4 @@ const routes: Routes = [
   ],
   declarations: [TabsPage]
 })
-export class TabsPageModule {}
+export class TabsPageModule { }
