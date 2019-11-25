@@ -7,26 +7,28 @@
 <ion-content>
   <ion-card>
     <ion-card-header>
-      <ion-card-title>Criar grupo</ion-card-title>
+      <ion-card-title>Criar favorito</ion-card-title>
       <ion-card-content>
         <ion-item>
           <ion-label position="floating">
             <ion-icon name="mail" slot="start"></ion-icon>
             Nome
           </ion-label>
-          <ion-input></ion-input>
+          <ion-input [(ngModel)]="favoritoX.nome"></ion-input>
         </ion-item>
-        <ion-button expand="block">Entrar</ion-button>
+        <ion-button expand="block" (click)="gravar()">Salvar</ion-button>
       </ion-card-content>
     </ion-card-header>
   </ion-card>
 
   <ion-card>
     <ion-card-header>
-      <ion-card-title>Meus grupos</ion-card-title>
-      <ion-card-content>
-
-      </ion-card-content>
+      <ion-card-title>Meus favoritos</ion-card-title>
     </ion-card-header>
+    <ion-card-content>
+      <ion-item *ngFor="let item of favorito | async" href="tabs/detalhes-favorito/{{ item.nome }}">
+        <ion-label> {{ item.nome }} </ion-label>
+      </ion-item>
+    </ion-card-content>
   </ion-card>
 </ion-content>

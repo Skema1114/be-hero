@@ -16,6 +16,12 @@ export class LoginService {
     return this.af.auth.currentUser;
   }
 
+  get usuarioEmail(): string {
+    console.log('LOGIN SERVICES EMAIL = '+this.af.auth.currentUser.email);
+
+    return this.af.auth.currentUser.email;
+  }
+
   public async login(email: string, senha: string) {
     const loading = await this.al.loading();
     this.af.auth.signInWithEmailAndPassword(email, senha).then(

@@ -23,15 +23,22 @@ const routes: Routes = [
         path: 'detalhes-heroi/:idHeroi',
         loadChildren: '../detalhes-heroi/detalhes-heroi.module#DetalhesHeroiPageModule', canActivate: [SessionGuard]
       },
+      { path: 'detalhes-favorito/:idFavorito',
+        loadChildren: '../detalhes-favorito/detalhes-favorito.module#DetalhesFavoritoPageModule', canActivate: [SessionGuard]
+      },
       {
         path: 'listar-heroi',
         loadChildren: '../listar-heroi/listar-heroi.module#ListarHeroiPageModule', canActivate: [SessionGuard]
       },
       {
-        path: 'herois-favoritos',
-        loadChildren: '../herois-favoritos/herois-favoritos.module#HeroisFavoritosPageModule',
-        canActivate: [SessionGuard]
-      }
+        path: 'listar-favorito',
+        loadChildren: '../listar-favorito/listar-favorito.module#ListarFavoritoPageModule', canActivate: [SessionGuard]
+      },
+      {
+        path: 'listar-favorito',
+        loadChildren: '../listar-favorito/listar-favorito.module#ListarFavoritoPageModule', canActivate: [SessionGuard]
+      },
+
     ]
   },
   {

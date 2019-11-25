@@ -18,6 +18,11 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AngularFireAuthModule } from '@angular/fire/auth';
 
+import { AngularFireStorageModule } from '@angular/fire/storage';
+
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -28,7 +33,9 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
     AngularFireModule.initializeApp(environment.fireConfig),
     AngularFireDatabaseModule,
     HttpClientModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    AngularFirestoreModule,
+    AngularFireStorageModule
   ],
   providers: [
     StatusBar,
