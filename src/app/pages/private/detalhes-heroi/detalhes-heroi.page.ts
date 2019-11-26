@@ -4,6 +4,7 @@ import { IbmTradutorWatsonService } from 'src/app/services/ibm-tradutor-watson.s
 import { HeroiFavoritoService } from 'src/app/services/heroi-favorito.service';
 import { MarvelService } from 'src/app/services/marvel.service';
 import { HeroiFavorito } from 'src/app/Models/HeroiFavorito';
+import { FavoritoService } from 'src/app/services/favorito.service';
 
 @Component({
   selector: 'app-detalhes-heroi',
@@ -26,14 +27,21 @@ export class DetalhesHeroiPage implements OnInit {
   textoDetalhesTraduzido: string;
   heroiX: HeroiFavorito;
   qualHeroi: number;
-
+  escondido: boolean;
+  retornoFav: any;
+  favoritoSelect: string;
+  nomePerson: string;
+  imgPerson: string;
 
   constructor(
     private rota: ActivatedRoute,
     private marvelHeroi: MarvelService,
     private watson: IbmTradutorWatsonService,
-    private herFav: HeroiFavoritoService
+    private herFav: HeroiFavoritoService,
+    private fav: FavoritoService
   ) {
+    this.escondido = false;
+
     this.qualHeroi = rota.snapshot.params.idHeroi;
     marvelHeroi.chamarHeroi(this.qualHeroi, 'personagem', 20).subscribe(respPersonagem => {
       this.retornoPersonagem = respPersonagem.data.results;
@@ -66,11 +74,28 @@ export class DetalhesHeroiPage implements OnInit {
     marvelHeroi.chamarDetalhesHeroi(this.qualHeroi, 'stories').subscribe(respStories => {
       this.retornoStories = respStories.data.results;
     });
+
+    fav.listarFavorito().subscribe(respFav => {
+      this.retornoFav = respFav;
+    });
   }
 
-  public favoritarHeroi(idHeroi): void {
+  public favoritarHeroi(favSelect, idHeroi, nomePerson, imgPerson): void {
     this.heroiX.idHeroi = idHeroi;
-    this.herFav.gravarHeroiFavorito('2uaFtqAEyOemnXBWaYJR', this.heroiX);
+    this.heroiX.nome = nomePerson;
+    this.heroiX.img = imgPerson;
+    this.herFav.gravarHeroiFavorito(favSelect, this.heroiX);
+  }
+
+  public esconderFavoritos() {
+    this.escondido = true;
+  }
+
+  public enviarSelect(idFav, nomePerson, imgPerson) {
+    this.nomePerson = nomePerson;
+    this.imgPerson = imgPerson;
+    this.favoritarHeroi(idFav, this.qualHeroi, nomePerson, imgPerson);
+
   }
 
   ngOnInit() {

@@ -24,7 +24,7 @@ export class ListarHeroiPage implements OnInit {
     this.mostrarHerois(this.numOffset);
   }
 
-  mostrarHerois(offset: number) {
+  public mostrarHerois(offset: number) {
     this.marvelHeroi.chamarMarvel('personagem', this.quantidadeSelect, offset).subscribe(resp => {
 
       this.TOTAL_HEROIS = resp.data.total;
