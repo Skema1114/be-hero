@@ -21,15 +21,17 @@ export class ListarFavoritoPage implements OnInit {
 
   public editar(favoritoEditado) {
     this.favoritoX = favoritoEditado;
+    this.fs.listar();
   }
 
   public gravar(): void {
+    this.favoritoX.emailUsuario = this.login.usuarioEmail;
     this.fs.gravar(this.favoritoX);
     this.favoritoX = new Favorito();
-    this.favoritoX.emailUsuario = this.login.usuarioEmail;
-    //this.favoritoX.idFavorito = this.fs.favoritoId().;
     console.log('HEROIS.TS USUARIO EMAIL = ' + this.login.usuarioEmail);
-    console.log('HEROIS.TS ID FAVO = ' + this.fs.favoritoId());
+    this.fs.favoritoId().subscribe(resp => {
+      console.log('HEROIS.TS ID FAVO = ', resp);
+    });
   }
 
   public apagar(idFavorito: string) {

@@ -26,8 +26,11 @@
       <ion-card-title>Meus favoritos</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <ion-item *ngFor="let item of favorito | async" href="tabs/detalhes-favorito/{{ item.nome }}">
+      <ion-item *ngFor="let item of favorito | async" href="tabs/detalhes-favorito/{{ item.id }}">
         <ion-label> {{ item.nome }} </ion-label>
+        <ion-note>
+          {{item.emailUsuario}}
+        </ion-note>
       </ion-item>
     </ion-card-content>
   </ion-card>

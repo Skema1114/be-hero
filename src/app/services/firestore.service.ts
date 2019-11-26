@@ -45,9 +45,9 @@ export class FirestoreService {
       .pipe(
         map(item =>
           item.map(Favorito => {
-            const idFavorito = Favorito.payload.doc.id;
+            const id = Favorito.payload.doc.id;
             const dados = Favorito.payload.doc.data();
-            return { idFavorito, ...dados };
+            return { id, ...dados };
           })
         )
       );
@@ -62,7 +62,7 @@ export class FirestoreService {
         map(item =>
           item.map(Favorito => {
             const idFavorito = Favorito.payload.doc.id;
-            console.log(idFavorito);
+            console.log('chave ' + idFavorito);
             return { idFavorito };
           })
         )

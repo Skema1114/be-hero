@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HeroiService } from 'src/app/services/heroi.service';
+import { IbmTradutorWatsonService } from 'src/app/services/ibm-tradutor-watson.service';
 
 @Component({
   selector: 'app-detalhes-heroi',
@@ -19,12 +20,20 @@ export class DetalhesHeroiPage implements OnInit {
   retornoEventos: any;
   retornoSeries: any;
   retornoStories: any;
+  textoDetalhes: any;
 
-  constructor(private rota: ActivatedRoute, private heroiCaracterSolo: HeroiService) {
+  constructor(private rota: ActivatedRoute, private heroiCaracterSolo: HeroiService, private watson: IbmTradutorWatsonService) {
     const qualHeroi = rota.snapshot.params.idHeroi;
 
     heroiCaracterSolo.chamarHeroi(qualHeroi, 'personagem', 20).subscribe(resp => {
       this.retorno = resp.data.results;
+      this.textoDetalhes = resp.data.results[0].description;
+      //console.log(this.textoDetalhes);
+
+      // console.log(watson.traduzir(this.textoDetalhes), null, 2);
+
+
+
     });
 
     heroiCaracterSolo.chamarDetalhesHeroi(qualHeroi, 'quadrinhos').subscribe(respQuadrinhos => {
