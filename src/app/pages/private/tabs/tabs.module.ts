@@ -16,14 +16,11 @@ const routes: Routes = [
     component: TabsPage,
     children: [
       {
-        path: 'inicio-privado',
-        loadChildren: '../inicio-privado/inicio-privado.module#InicioPrivadoPageModule', canActivate: [SessionGuard]
-      },
-      {
         path: 'detalhes-heroi/:idHeroi',
         loadChildren: '../detalhes-heroi/detalhes-heroi.module#DetalhesHeroiPageModule', canActivate: [SessionGuard]
       },
-      { path: 'detalhes-favorito/:idFavorito',
+      {
+        path: 'detalhes-favorito/:idFavorito',
         loadChildren: '../detalhes-favorito/detalhes-favorito.module#DetalhesFavoritoPageModule', canActivate: [SessionGuard]
       },
       {

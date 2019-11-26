@@ -8,19 +8,15 @@
 </ion-header>
 
 <ion-content>
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>NOME DO FAVORITO</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <ion-item *ngFor="let hFavs of heroisFavorito | async">
-        <ion-thumbnail slot="start">
-          <ion-img src="{{hFavs.img}}.jpg"></ion-img>
-        </ion-thumbnail>
-        <ion-note> {{ hFavs.nome }} </ion-note>
-        <ion-button color="danger" (click)="apagar(hFavs.id)">Apagar</ion-button>
-      </ion-item>
-      <!--
+  <div class="ion-padding">
+    <ion-item *ngFor="let hFavs of heroisFavorito | async">
+      <ion-thumbnail slot="start">
+        <ion-img src="{{hFavs.img}}.jpg"></ion-img>
+      </ion-thumbnail>
+      <ion-label> {{ hFavs.nome }} </ion-label>
+      <ion-button color="danger" (click)="apagar(hFavs.id)">Apagar</ion-button>
+    </ion-item>
+    <!--
       <ion-item *ngFor="let rHeroi of retornoX">
         <ion-thumbnail slot="start">
           <ion-img src="{{rHeroi.thumbnail.path}}.{{rHeroi.thumbnail.extension}}"></ion-img>
@@ -29,6 +25,5 @@
         <ion-button color="danger" (click)="apagar(hFavs.id)">Apagar</ion-button>
       </ion-item>
     -->
-    </ion-card-content>
-  </ion-card>
+  </div>
 </ion-content>

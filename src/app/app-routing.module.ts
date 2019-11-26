@@ -11,10 +11,6 @@ const routes: Routes = [
     canActivate: [SessionGuard]
   },
   {
-    path: 'inicio',
-    loadChildren: './pages/public/inicio/inicio.module#InicioPageModule'
-  },
-  {
     path: 'login',
     loadChildren: './pages/public/login/login.module#LoginPageModule'
   },
@@ -22,6 +18,11 @@ const routes: Routes = [
     path: 'criar-conta',
     loadChildren: './pages/public/criar-conta/criar-conta.module#CriarContaPageModule'
   },
+  {
+    path: 'recuperar-senha',
+    loadChildren: './pages/public/recuperar-senha/recuperar-senha.module#RecuperarSenhaPageModule'
+  },
+
 
 ];
 

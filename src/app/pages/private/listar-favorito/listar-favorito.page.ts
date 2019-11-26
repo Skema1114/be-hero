@@ -30,12 +30,6 @@ export class ListarFavoritoPage implements OnInit {
   public gravar(): void {
     this.fav.gravarFavorito(this.favoritoX);
     this.favoritoX = new Favorito();
-    console.log('HEROIS.TS USUARIO EMAIL = ' + this.login.usuarioEmail);
-    /*
-        this.fs.favoritoId().subscribe(resp => {
-          console.log('HEROIS.TS ID FAVO = ', resp);
-        });
-        */
   }
 
   public apagar(idFavorito: string) {

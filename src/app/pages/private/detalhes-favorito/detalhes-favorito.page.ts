@@ -35,7 +35,6 @@ export class DetalhesFavoritoPage implements OnInit {
     this.marvel.chamarHeroi(idHeroi, 'personagem', 20).subscribe(respHerois => {
       respHerois.data.results.forEach(element => {
         this.retornoX.push(element);
-        console.log(this.retornoX);
       });
     });
   }

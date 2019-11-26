@@ -46,17 +46,12 @@ export class DetalhesHeroiPage implements OnInit {
     marvelHeroi.chamarHeroi(this.qualHeroi, 'personagem', 20).subscribe(respPersonagem => {
       this.retornoPersonagem = respPersonagem.data.results;
       this.textoDetalhes = respPersonagem.data.results[0].description;
-      console.log('DETALHES PUROS ' + this.textoDetalhes);
-
       // console.log(watson.traduzir(this.textoDetalhes), null, 2);
       this.heroiX = new HeroiFavorito();
     });
 
     watson.traduzir(this.textoDetalhes).subscribe(respDetalhes => {
       this.textoDetalhesTraduzido = respDetalhes.translations;
-      console.log('TRADUCAO ' + this.textoDetalhesTraduzido);
-      console.log('DETAHES PUROS 3 LOG ' + this.textoDetalhes);
-
     })
 
     marvelHeroi.chamarDetalhesHeroi(this.qualHeroi, 'quadrinhos').subscribe(respQuadrinhos => {

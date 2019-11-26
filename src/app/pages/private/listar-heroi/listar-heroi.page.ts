@@ -9,7 +9,6 @@ import { MarvelService } from 'src/app/services/marvel.service';
 })
 export class ListarHeroiPage implements OnInit {
   retornoX = new Array();
-  // retorno: any;
   retornoSeparado: any;
   quantidadeSelect: number;
   TOTAL_HEROIS: number;
@@ -28,9 +27,6 @@ export class ListarHeroiPage implements OnInit {
     this.marvelHeroi.chamarMarvel('personagem', this.quantidadeSelect, offset).subscribe(resp => {
 
       this.TOTAL_HEROIS = resp.data.total;
-      console.log('ESSE E O RETORNO', this.TOTAL_HEROIS);
-
-      //this.retorno = resp.data.results;
 
       resp.data.results.forEach(element => {
         this.retornoX.push(element);
@@ -56,10 +52,8 @@ export class ListarHeroiPage implements OnInit {
       //this.addMoreItems();
       if (this.numOffset < (this.TOTAL_HEROIS - 100)/*1393*/) {
         this.numOffset += 50;
-        console.log(this.numOffset);
         this.mostrarHerois(this.numOffset);
       } else {
-        console.log('ACABOOOO');
         this.numTimesLeft -= 1;
       }
       event.target.complete();

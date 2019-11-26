@@ -5,6 +5,7 @@ import { AlertService } from './alert.service';
 import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -17,8 +18,6 @@ export class LoginService {
   }
 
   get usuarioEmail(): string {
-    console.log('LOGIN SERVICES EMAIL = '+this.af.auth.currentUser.email);
-
     return this.af.auth.currentUser.email;
   }
 
@@ -30,13 +29,13 @@ export class LoginService {
         if (user.user.emailVerified) {
           this.route.navigateByUrl('tabs/listar-heroi');
         } else {
-          this.al.toast({ message: 'Acesso negado! Você precisa verificar seu email.' });
+          this.al.toast({ message: 'Pare ai guerreiro! Precisamos que confirme seu e-mail' });
           this.logout();
         }
       },
       error => {
         loading.dismiss();
-        this.al.toast({ message: 'Usuário ou senha inválidos' });
+        this.al.toast({ message: 'Não achamos seu usuario ou sua senha' });
       }
     );
   }
@@ -55,16 +54,14 @@ export class LoginService {
             displayName: u.nome
           })
           .then(() => {
-            // ENVIA UM EMAIL DE CONFIRMACAO
             this.af.auth.currentUser.sendEmailVerification({
               url: 'http://localhost:8100'
             });
             loading.dismiss();
-            this.al.alert('Cadastro efetivado com sucesso! Verifique seu e-mail.', {
+            this.al.alert('Bem vindo a iniciativa BeHero! Mas antes verifique seu email para continuarmos', {
               buttons: [
                 {
                   text: 'Continuar',
-                  // AÇÃO QUE O BOTAO VAI EXECUTAR
                   handler: () => {
                     this.route.navigate(['login']);
                   }
@@ -75,7 +72,7 @@ export class LoginService {
       },
       erro => {
         if (erro.code === 'auth/invalid-email') {
-          this.al.alert('Email inválido');
+          this.al.alert('Algo errado com o email');
         }
         console.log(erro);
       }
@@ -85,9 +82,23 @@ export class LoginService {
   public isLogado(): Observable<boolean> {
     return this.af.authState.pipe(
       map(usuario => {
-        // SE USUARIO DIFERENTE DE NULO QUER DIZER QUE EXISTE USUARIO LOGADO OU SESSÃO ATIVA
         return usuario !== null;
       })
+    );
+  }
+
+  public async recuperarSenha(email: string): Promise<boolean> {
+    const loading = await this.al.loading();
+    return this.af.auth.sendPasswordResetEmail(email, { url: environment.fireConfig + '/login' }).then(
+      res => {
+        loading.dismiss();
+        return true;
+      },
+      err => {
+        loading.dismiss();
+        this.al.toast({ message: err });
+        return false;
+      }
     );
   }
 }
