@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { HeroiService } from 'src/app/services/heroi.service';
+import { MarvelService } from 'src/app/services/marvel.service';
 
 @Component({
   selector: 'app-listar-heroi',
@@ -17,7 +17,7 @@ export class ListarHeroiPage implements OnInit {
   numTimesLeft = 1;
 
 
-  constructor(private heroiCaracter: HeroiService, private rota: Router) {
+  constructor(private marvelHeroi: MarvelService, private rota: Router) {
     this.quantidadeSelect = 50;
     this.numOffset = 0;
 
@@ -25,7 +25,7 @@ export class ListarHeroiPage implements OnInit {
   }
 
   mostrarHerois(offset: number) {
-    this.heroiCaracter.chamarMarvel('personagem', this.quantidadeSelect, offset).subscribe(resp => {
+    this.marvelHeroi.chamarMarvel('personagem', this.quantidadeSelect, offset).subscribe(resp => {
 
       this.TOTAL_HEROIS = resp.data.total;
       console.log('ESSE E O RETORNO', this.TOTAL_HEROIS);
@@ -40,7 +40,7 @@ export class ListarHeroiPage implements OnInit {
 
   /*
     heroiChamar(id: number) {
-      this.heroiCaracter.chamarHeroi(id, 'personagem', 20).subscribe(respp => {
+      this.marvelHeroi.chamarHeroi(id, 'personagem', 20).subscribe(respp => {
         this.retornoSeparado = respp.data.results;
         console.log(respp);
       });
@@ -50,6 +50,7 @@ export class ListarHeroiPage implements OnInit {
 
   // REFERENCIA: https://www.youtube.com/watch?v=M86HPj_YuXQ
   // E: https://github.com/jamesonsaunders/Ionic-4-Infinite-Scroll-Example/blob/master/src/app/home/home.page.html
+
   loadData(event) {
     setTimeout(() => {
       //this.addMoreItems();

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { FirestoreService } from 'src/app/services/firestore.service';
+import { HeroiFavoritoService } from 'src/app/services/heroi-favorito.service';
 
 @Component({
   selector: 'app-detalhes-favorito',
@@ -9,11 +9,12 @@ import { FirestoreService } from 'src/app/services/firestore.service';
 })
 export class DetalhesFavoritoPage implements OnInit {
   heroisFavorito: any;
+  
 
-  constructor(private rota: ActivatedRoute, private firestore: FirestoreService) {
+  constructor(private rota: ActivatedRoute, private herFav: HeroiFavoritoService) {
     const qualFavorito = rota.snapshot.params.idFavorito;
-    
-    this.heroisFavorito = firestore.listarFavoritos(qualFavorito);
+
+    this.heroisFavorito = herFav.listarHeroiFavorito(qualFavorito);
 
   }
 

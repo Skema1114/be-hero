@@ -6,7 +6,7 @@ import { Md5 } from 'ts-md5/dist/md5';
 @Injectable({
   providedIn: 'root'
 })
-export class HeroiService {
+export class MarvelService {
   private privateKey = '453db515744f254357dec27ce27bd599dbe198e6';
   private publicKey = '6f20b1d3be1fedab63c26386708c4529';
   private md5 = new Md5();

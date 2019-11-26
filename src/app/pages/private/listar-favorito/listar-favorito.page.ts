@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Favorito } from 'src/app/Models/Favorito';
-import { FirestoreService } from 'src/app/services/firestore.service';
 import { LoginService } from 'src/app/services/login.service';
+import { FavoritoService } from 'src/app/services/favorito.service';
 
 @Component({
   selector: 'app-listar-favorito',
@@ -12,22 +12,24 @@ export class ListarFavoritoPage implements OnInit {
   favoritoX: Favorito;
   favorito: any;
 
-  constructor(private fs: FirestoreService, private login: LoginService) {
+  constructor(private fav: FavoritoService, private login: LoginService) {
     this.favoritoX = new Favorito();
-    this.favorito = fs.listar();
+    this.favorito = fav.listarFavorito();
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.favorito = this.fav.listarFavorito();
+  }
 
   public editar(favoritoEditado) {
     this.favoritoX = favoritoEditado;
-    this.fs.listar();
+    this.fav.listarFavorito();
   }
 
 
   public gravar(): void {
     //this.favoritoX.emailUsuario = this.login.usuarioEmail;
-    this.fs.gravar(this.favoritoX);
+    this.fav.gravarFavorito(this.favoritoX);
     this.favoritoX = new Favorito();
     console.log('HEROIS.TS USUARIO EMAIL = ' + this.login.usuarioEmail);
     /*
@@ -38,6 +40,6 @@ export class ListarFavoritoPage implements OnInit {
   }
 
   public apagar(idFavorito: string) {
-    this.fs.remover(idFavorito);
+    this.fav.removerFavorito(idFavorito);
   }
 }

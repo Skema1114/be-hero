@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { HeroiService } from 'src/app/services/heroi.service';
 import { IbmTradutorWatsonService } from 'src/app/services/ibm-tradutor-watson.service';
+import { HeroiFavoritoService } from 'src/app/services/heroi-favorito.service';
+import { MarvelService } from 'src/app/services/marvel.service';
 
 @Component({
   selector: 'app-detalhes-heroi',
@@ -23,10 +24,15 @@ export class DetalhesHeroiPage implements OnInit {
   textoDetalhes: string;
   textoDetalhesTraduzido: string;
 
-  constructor(private rota: ActivatedRoute, private heroiCaracterSolo: HeroiService, private watson: IbmTradutorWatsonService) {
+  constructor(
+    private rota: ActivatedRoute,
+    private marvelHeroi: MarvelService,
+    private watson: IbmTradutorWatsonService,
+    private herFav: HeroiFavoritoService
+  ) {
     const qualHeroi = rota.snapshot.params.idHeroi;
 
-    heroiCaracterSolo.chamarHeroi(qualHeroi, 'personagem', 20).subscribe(respPersonagem => {
+    marvelHeroi.chamarHeroi(qualHeroi, 'personagem', 20).subscribe(respPersonagem => {
       this.retornoPersonagem = respPersonagem.data.results;
       this.textoDetalhes = respPersonagem.data.results[0].description;
       console.log('DETALHES PUROS ' + this.textoDetalhes);
@@ -41,19 +47,19 @@ export class DetalhesHeroiPage implements OnInit {
 
     })
 
-    heroiCaracterSolo.chamarDetalhesHeroi(qualHeroi, 'quadrinhos').subscribe(respQuadrinhos => {
+    marvelHeroi.chamarDetalhesHeroi(qualHeroi, 'quadrinhos').subscribe(respQuadrinhos => {
       this.retornoQuadrinhos = respQuadrinhos.data.results;
     });
 
-    heroiCaracterSolo.chamarDetalhesHeroi(qualHeroi, 'eventos').subscribe(respEventos => {
+    marvelHeroi.chamarDetalhesHeroi(qualHeroi, 'eventos').subscribe(respEventos => {
       this.retornoEventos = respEventos.data.results;
     });
 
-    heroiCaracterSolo.chamarDetalhesHeroi(qualHeroi, 'series').subscribe(respSeries => {
+    marvelHeroi.chamarDetalhesHeroi(qualHeroi, 'series').subscribe(respSeries => {
       this.retornoSeries = respSeries.data.results;
     });
 
-    heroiCaracterSolo.chamarDetalhesHeroi(qualHeroi, 'stories').subscribe(respStories => {
+    marvelHeroi.chamarDetalhesHeroi(qualHeroi, 'stories').subscribe(respStories => {
       this.retornoStories = respStories.data.results;
     });
   }

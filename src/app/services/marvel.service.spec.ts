@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { FirestoreService } from './firestore.service';
+import { MarvelService } from './marvel.service';
 
-describe('FirestoreService', () => {
+describe('MarvelService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: FirestoreService = TestBed.get(FirestoreService);
+    const service: MarvelService = TestBed.get(MarvelService);
     expect(service).toBeTruthy();
   });
 });
