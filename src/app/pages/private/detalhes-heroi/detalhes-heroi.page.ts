@@ -15,26 +15,31 @@ export class DetalhesHeroiPage implements OnInit {
     speed: 400
   };
 
-  retorno: any;
+  retornoPersonagem: any;
   retornoQuadrinhos: any;
   retornoEventos: any;
   retornoSeries: any;
   retornoStories: any;
-  textoDetalhes: any;
+  textoDetalhes: string;
+  textoDetalhesTraduzido: string;
 
   constructor(private rota: ActivatedRoute, private heroiCaracterSolo: HeroiService, private watson: IbmTradutorWatsonService) {
     const qualHeroi = rota.snapshot.params.idHeroi;
 
-    heroiCaracterSolo.chamarHeroi(qualHeroi, 'personagem', 20).subscribe(resp => {
-      this.retorno = resp.data.results;
-      this.textoDetalhes = resp.data.results[0].description;
-      //console.log(this.textoDetalhes);
+    heroiCaracterSolo.chamarHeroi(qualHeroi, 'personagem', 20).subscribe(respPersonagem => {
+      this.retornoPersonagem = respPersonagem.data.results;
+      this.textoDetalhes = respPersonagem.data.results[0].description;
+      console.log('DETALHES PUROS ' + this.textoDetalhes);
 
       // console.log(watson.traduzir(this.textoDetalhes), null, 2);
-
-
-
     });
+
+    watson.traduzir(this.textoDetalhes).subscribe(respDetalhes => {
+      this.textoDetalhesTraduzido = respDetalhes.translations;
+      console.log('TRADUCAO ' + this.textoDetalhesTraduzido);
+      console.log('DETAHES PUROS 3 LOG ' + this.textoDetalhes);
+
+    })
 
     heroiCaracterSolo.chamarDetalhesHeroi(qualHeroi, 'quadrinhos').subscribe(respQuadrinhos => {
       this.retornoQuadrinhos = respQuadrinhos.data.results;

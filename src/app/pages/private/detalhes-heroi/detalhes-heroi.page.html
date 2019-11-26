@@ -3,49 +3,33 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/tabs/listar-heroi"> </ion-back-button>
     </ion-buttons>
-    <ion-grid>
-      <ion-row>
-        <ion-col size="8">
-          <ion-title>Detalhes</ion-title>
-        </ion-col>
-        <ion-col size="4" class="ion-float-left">
-          <ion-note>FAVORITO</ion-note>
-          <ion-checkbox checked="true"></ion-checkbox>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-
+    <ion-title>Detalhes</ion-title>
+    <ion-button slot="end">Favoritar</ion-button>
   </ion-toolbar>
 </ion-header>
 
-<ion-content *ngFor="let item of retorno" fullscreen>
+<ion-content *ngFor="let rPersonagem of retornoPersonagem" fullscreen>
   <ion-card>
-    <ion-img src="{{item.thumbnail.path}}.{{item.thumbnail.extension}}"></ion-img>
+    <ion-img src="{{rPersonagem.thumbnail.path}}.{{rPersonagem.thumbnail.extension}}"></ion-img>
     <ion-card-header>
       <ion-card-subtitle>Destination</ion-card-subtitle>
-      <ion-card-title>
-        <ion-grid>
-          <ion-row>
-            <ion-col size="8">
-              {{ item.name }}
-            </ion-col>
-            <ion-col size="4" class="ion-float-left">
-              <ion-note>FAVORITO</ion-note>
-              <ion-checkbox checked="true"></ion-checkbox>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-
-      </ion-card-title>
+      <ion-card-title>{{ rPersonagem.name }}</ion-card-title>
     </ion-card-header>
-    <ion-card-content class="ion-text-justify">{{ item.description }}</ion-card-content>
+    <ion-card-content>
+      <ion-item class="ion-text-justify">
+        {{ rPersonagem.description }}
+      </ion-item>
+      <ion-item *ngFor="let tDescTraduzida of textoDetalhesTraduzido">
+        {{ tDescTraduzida.translation }}
+      </ion-item>
+    </ion-card-content>
   </ion-card>
 
   <ion-card>
     <ion-card-header>
       <ion-card-subtitle>
         Quadrinhos
-        <ion-badge>{{ item.comics.available }}</ion-badge>
+        <ion-badge>{{ rPersonagem.comics.available }}</ion-badge>
       </ion-card-subtitle>
       <ion-card-title></ion-card-title>
     </ion-card-header>
@@ -74,7 +58,7 @@
     <ion-card-header>
       <ion-card-subtitle>
         Events
-        <ion-badge>{{ item.events.available }}</ion-badge>
+        <ion-badge>{{ rPersonagem.events.available }}</ion-badge>
       </ion-card-subtitle>
       <ion-card-title></ion-card-title>
     </ion-card-header>
@@ -103,7 +87,7 @@
     <ion-card-header>
       <ion-card-subtitle>
         Series
-        <ion-badge>{{ item.series.available }}</ion-badge>
+        <ion-badge>{{ rPersonagem.series.available }}</ion-badge>
       </ion-card-subtitle>
       <ion-card-title></ion-card-title>
     </ion-card-header>
@@ -133,7 +117,7 @@
     <ion-card-header>
       <ion-card-subtitle>
         Stories
-        <ion-badge>{{ item.stories.available }}</ion-badge>
+        <ion-badge>{{ rPersonagem.stories.available }}</ion-badge>
       </ion-card-subtitle>
       <ion-card-title></ion-card-title>
     </ion-card-header>

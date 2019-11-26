@@ -11,7 +11,7 @@ import { LoginService } from './login.service';
 export class FirestoreService {
   usuarioLogado: firebase.User;
   usuarioEmail: string;
-  favoritoIdGet: string;
+  favoritoIdGet: any;
 
   constructor(private firestore: AngularFirestore, private storage: AngularFireStorage, private login: LoginService) {
     this.usuarioLogado = login.usuarioLogado;
@@ -19,6 +19,7 @@ export class FirestoreService {
   }
 
   public gravar(favorito: Favorito) {
+    this.consultarFavoritos();
     // VERIFIOCA SE TEM ID
     if (favorito.idFavorito) {
       // SE TRATA DE UMA ATUALIZAÇÃO
@@ -26,8 +27,7 @@ export class FirestoreService {
       this.firestore.doc(url).update({ ...favorito });
     } else {
       const url = 'usuarios/' + this.usuarioEmail + '/favoritos/';
-      // CRIA UMA NOVA ENTRADA
-
+      favorito.emailUsuario = this.usuarioEmail;
       this.firestore.collection(url).add({ ...favorito });
     }
   }
@@ -39,6 +39,8 @@ export class FirestoreService {
 
   public listar() {
     const url = 'usuarios/' + this.usuarioEmail + '/favoritos/';
+
+    //  if (this.usuarioEmail == ) {
     return this.firestore
       .collection(url)
       .snapshotChanges()
@@ -51,32 +53,48 @@ export class FirestoreService {
           })
         )
       );
-  }
+    // }
 
-  public favoritoId() {
-    const url = 'usuarios/' + this.usuarioEmail + '/favoritos/';
-    return this.firestore
-      .collection(url)
-      .snapshotChanges()
-      .pipe(
-        map(item =>
-          item.map(Favorito => {
-            const idFavorito = Favorito.payload.doc.id;
-            console.log('chave ' + idFavorito);
-            return { idFavorito };
-          })
-        )
-      );
   }
   /*
-  public enviarFoto(foto: string, carroUid: string) {
-    const url = `fotos/${carroUid}/${new Date().getTime()}.jpg`;
-
-    this.storage
-      .ref(url)
-      .putString(foto, 'base64', { contentType: 'image/jpg' })
-      .then(resp => {
-        console.log('envio finalizado!', resp);
+    consultarFavoritos() {
+      let citiesRef = db.collection('cities');
+  let allCities = citiesRef.get()
+    .then(snapshot => {
+      snapshot.forEach(doc => {
+        console.log(doc.id, '=>', doc.data());
       });
-  }*/
+    })
+    .catch(err => {
+      console.log('Error getting documents', err);
+    });
+  
+    }
+    */
 }
+  /*
+public favoritoId() {
+const url = 'usuarios/' + this.usuarioEmail + '/favoritos/';
+return this.firestore
+.collection(url)
+.snapshotChanges()
+.pipe(
+map(item =>
+item.map(Favorito => {
+const idFavorito = Favorito.payload.doc.id;
+console.log('chave ' + idFavorito);
+return { idFavorito };
+})
+)
+);
+
+public enviarFoto(foto: string, carroUid: string) {
+const url = `fotos/${carroUid}/${new Date().getTime()}.jpg`;
+
+this.storage
+.ref(url)
+.putString(foto, 'base64', { contentType: 'image/jpg' })
+.then(resp => {
+console.log('envio finalizado!', resp);
+});
+}*/
