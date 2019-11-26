@@ -9,16 +9,21 @@ import { HeroiFavoritoService } from 'src/app/services/heroi-favorito.service';
 })
 export class DetalhesFavoritoPage implements OnInit {
   heroisFavorito: any;
-  
+  qualFavorito;
+
 
   constructor(private rota: ActivatedRoute, private herFav: HeroiFavoritoService) {
-    const qualFavorito = rota.snapshot.params.idFavorito;
+    this.qualFavorito = rota.snapshot.params.idFavorito;
 
-    this.heroisFavorito = herFav.listarHeroiFavorito(qualFavorito);
+    this.heroisFavorito = herFav.listarHeroiFavorito(this.qualFavorito);
 
   }
 
   ngOnInit() {
+  }
+
+  public apagar(idHeroi: string) {
+    this.herFav.removerHeroiFavorito(this.qualFavorito, idHeroi);
   }
 
 }

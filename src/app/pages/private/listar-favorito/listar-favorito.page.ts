@@ -28,7 +28,6 @@ export class ListarFavoritoPage implements OnInit {
 
 
   public gravar(): void {
-    //this.favoritoX.emailUsuario = this.login.usuarioEmail;
     this.fav.gravarFavorito(this.favoritoX);
     this.favoritoX = new Favorito();
     console.log('HEROIS.TS USUARIO EMAIL = ' + this.login.usuarioEmail);

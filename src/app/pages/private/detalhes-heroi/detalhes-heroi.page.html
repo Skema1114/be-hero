@@ -1,10 +1,10 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar *ngFor="let rPersonagem of retornoPersonagem">
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/tabs/listar-heroi"> </ion-back-button>
     </ion-buttons>
     <ion-title>Detalhes</ion-title>
-    <ion-button slot="end">Favoritar</ion-button>
+    <ion-button slot="end" (click)="favoritarHeroi(rPersonagem.id)">Favoritar</ion-button>
   </ion-toolbar>
 </ion-header>
 

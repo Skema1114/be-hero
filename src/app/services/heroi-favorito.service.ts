@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Favorito } from '../models/Favorito';
 import { map } from 'rxjs/operators';
 import { LoginService } from './login.service';
+import { HeroiFavorito } from '../Models/HeroiFavorito';
 
 @Injectable({
   providedIn: 'root'
@@ -16,15 +16,14 @@ export class HeroiFavoritoService {
     this.usuarioEmail = login.usuarioEmail;
   }
 
-  public gravarHeroiFavorito(favorito: Favorito) {
-    const url = 'usuarios/' + this.usuarioEmail + '/favoritos/';
+  public gravarHeroiFavorito(favoritoId, heroiFav: HeroiFavorito) {
+    const url = 'usuarios/' + this.usuarioEmail + '/favoritos/' + favoritoId + '/herois/';
 
-    favorito.emailUsuario = this.usuarioEmail;
-    this.firestore.collection(url).add({ ...favorito });
+    this.firestore.collection(url).add({ ...heroiFav });
   }
 
-  public removerHeroiFavorito(favorito: string) {
-    const url = 'usuarios/' + this.usuarioEmail + '/favoritos/' + favorito;
+  public removerHeroiFavorito(favoritoId, heroiId) {
+    const url = 'usuarios/' + this.usuarioEmail + '/favoritos/' + favoritoId + '/herois/' + heroiId;
 
     this.firestore.doc(url).delete();
   }
