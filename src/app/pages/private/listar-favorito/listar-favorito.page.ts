@@ -24,6 +24,7 @@ export class ListarFavoritoPage implements OnInit {
     this.fs.listar();
   }
 
+
   public gravar(): void {
     //this.favoritoX.emailUsuario = this.login.usuarioEmail;
     this.fs.gravar(this.favoritoX);

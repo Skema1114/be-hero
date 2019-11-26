@@ -4,6 +4,7 @@ import { Favorito } from '../models/Favorito';
 import { map } from 'rxjs/operators';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { LoginService } from './login.service';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,14 +13,16 @@ export class FirestoreService {
   usuarioLogado: firebase.User;
   usuarioEmail: string;
   favoritoIdGet: any;
+  coisos: Observable<any[]>;
+
+
 
   constructor(private firestore: AngularFirestore, private storage: AngularFireStorage, private login: LoginService) {
     this.usuarioLogado = login.usuarioLogado;
     this.usuarioEmail = login.usuarioEmail;
   }
 
-  public gravar(favorito: Favorito) {
-    this.consultarFavoritos();
+  public gravarFavorito(favorito: Favorito) {
     // VERIFIOCA SE TEM ID
     if (favorito.idFavorito) {
       // SE TRATA DE UMA ATUALIZAÇÃO
@@ -56,45 +59,21 @@ export class FirestoreService {
     // }
 
   }
-  /*
-    consultarFavoritos() {
-      let citiesRef = db.collection('cities');
-  let allCities = citiesRef.get()
-    .then(snapshot => {
-      snapshot.forEach(doc => {
-        console.log(doc.id, '=>', doc.data());
-      });
-    })
-    .catch(err => {
-      console.log('Error getting documents', err);
-    });
-  
-    }
-    */
+
+  listarFavoritos(favoritoId) {
+    const url = 'usuarios/' + this.usuarioEmail + '/favoritos/' + favoritoId + '/herois/';
+
+    return this.firestore
+      .collection(url)
+      .snapshotChanges()
+      .pipe(
+        map(item =>
+          item.map(FavoritoId => {
+            const id = FavoritoId.payload.doc.id;
+            const dados = FavoritoId.payload.doc.data();
+            return { id, ...dados };
+          })
+        )
+      );
+  }
 }
-  /*
-public favoritoId() {
-const url = 'usuarios/' + this.usuarioEmail + '/favoritos/';
-return this.firestore
-.collection(url)
-.snapshotChanges()
-.pipe(
-map(item =>
-item.map(Favorito => {
-const idFavorito = Favorito.payload.doc.id;
-console.log('chave ' + idFavorito);
-return { idFavorito };
-})
-)
-);
-
-public enviarFoto(foto: string, carroUid: string) {
-const url = `fotos/${carroUid}/${new Date().getTime()}.jpg`;
-
-this.storage
-.ref(url)
-.putString(foto, 'base64', { contentType: 'image/jpg' })
-.then(resp => {
-console.log('envio finalizado!', resp);
-});
-}*/
